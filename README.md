@@ -116,13 +116,8 @@ You will need to ensure that you have installed the following items through the 
 | Android SDK Tools          | 26.0.2  |
 | Android SDK Platform-tools | 26.0.2  |
 | Android SDK Build-tools    | 26.0.2  |
-| Android Support Repository | 47      |
-| Android Support Library    | 26.1.0  |
 | Google Play Services       | 11.8.0  |
 | Google Repository          | 58      |
-
-Android is no longer supporting downloading support libraries through the SDK Manager.
-The support libraries are now available through Google's Maven repository.
 
 ## Example
 
