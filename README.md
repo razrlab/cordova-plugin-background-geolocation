@@ -211,19 +211,7 @@ function onDeviceReady() {
     console.log('[INFO] App needs to authorize the http requests');
   });
 
-  BackgroundGeolocation.checkStatus(function(status) {
-    console.log('[INFO] BackgroundGeolocation service is running', status.isRunning);
-    console.log('[INFO] BackgroundGeolocation services enabled', status.locationServicesEnabled);
-    console.log('[INFO] BackgroundGeolocation auth status: ' + status.authorization);
-
-    // you don't need to check status before start (this is just the example)
-    if (!status.isRunning) {
-      BackgroundGeolocation.start(); //triggers start on start event
-    }
-  });
-
-  // you can also just start without checking for status
-  // BackgroundGeolocation.start();
+  BackgroundGeolocation.start();
 
   // Don't forget to remove listeners at some point!
   // BackgroundGeolocation.removeAllListeners();
@@ -246,7 +234,7 @@ Configure options:
 | `debug`                   | `Boolean`         | all          | When enabled, the plugin will emit sounds for life-cycle events of background-geolocation! See debugging sounds table.                                                                                                                                                                                                                             | all         | false                      | 
 | `distanceFilter`          | `Number`          | all          | The minimum distance (measured in meters) a device must move horizontally before an update event is generated. **@see** [Apple docs](https://developer.apple.com/library/ios/documentation/CoreLocation/Reference/CLLocationManager_Class/CLLocationManager/CLLocationManager.html#//apple_ref/occ/instp/CLLocationManager/distanceFilter).        | DIS,RAW     | 500                        | 
 | `stopOnTerminate`         | `Boolean`         | all          | Enable this in order to force a stop() when the application terminated (e.g. on iOS, double-tap home button, swipe away the app).                                                                                                                                                                                                                  | all         | true                       | 
-| `startOnBoot`             | `Boolean`         | Android      | Start background service on device boot.                                                                                                                                                                                                                                                                                                           | all         | false                      | 
+| `startOnBoot`             | `Boolean`         | all          | Start background service on device boot.                                                                                                                                                                                                                                                                                                           | all         | false                      | 
 | `interval`                | `Number`          | Android      | The minimum time interval between location updates in milliseconds. **@see** [Android docs](http://developer.android.com/reference/android/location/LocationManager.html#requestLocationUpdates(long,%20float,%20android.location.Criteria,%20android.app.PendingIntent)) for more information.                                                    | all         | 60000                      | 
 | `fastestInterval`         | `Number`          | Android      | Fastest rate in milliseconds at which your app can handle location updates. **@see** [Android  docs](https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest.html#getFastestInterval()).                                                                                                                   | ACT         | 120000                     | 
 | `activitiesInterval`      | `Number`          | Android      | Rate in milliseconds at which activity recognition occurs. Larger values will result in fewer activity detections while improving battery life.                                                                                                                                                                                                    | ACT         | 10000                      | 
@@ -346,7 +334,6 @@ Error codes:
 
 ### isLocationEnabled(success, fail)
 Deprecated: This method is deprecated and will be removed in next major version.
-Use `checkStatus` as replacement.
 
 Platform: iOS, Android
 
@@ -355,24 +342,6 @@ One time check for status of location services. In case of error, fail callback 
 | Success callback parameter | Type      | Description                                          |
 |----------------------------|-----------|------------------------------------------------------|
 | `enabled`                  | `Boolean` | true/false (true when location services are enabled) |
-
-### checkStatus(success, fail)
-
-Check status of the service
-
-| Success callback parameter | Type      | Description                                          |
-|----------------------------|-----------|------------------------------------------------------|
-| `isRunning`                | `Boolean` | true/false (true if service is running)              |
-| `locationServicesEnabled`  | `Boolean` | true/false (true if location services are enabled)   |
-| `authorization`            | `Number`  | authorization status                                 |
-
-Authorization statuses:
-
-* NOT_AUTHORIZED
-* AUTHORIZED - authorization to run in background and foreground
-* AUTHORIZED_FOREGROUND iOS only authorization to run in foreground only
-
-Note: In the Android concept of authorization, these represent application permissions.
 
 ### showAppSettings()
 Platform: Android >= 6, iOS >= 8.0

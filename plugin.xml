@@ -218,134 +218,30 @@
     </platform>
 
     <platform name="ios">
+        <preference name="BACKGROUND_MODE_LOCATION" default="&lt;string&gt;location&lt;/string&gt;" />
+
         <!-- required background modes:  App registers for location updates -->
-        <preference name="ALWAYS_USAGE_DESCRIPTION" default="This app always requires location tracking" />
-        <preference name="MOTION_USAGE_DESCRIPTION" default="This app requires motion detection" />
-
-        <config-file target="*-Info.plist" parent="NSLocationAlwaysUsageDescription">
-            <string>$ALWAYS_USAGE_DESCRIPTION</string>
-        </config-file>
-        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
-            <string>$ALWAYS_USAGE_DESCRIPTION</string>
-        </config-file>
-        <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
-            <string>$ALWAYS_USAGE_DESCRIPTION</string>
-        </config-file>
-        <config-file target="*-Info.plist" parent="NSMotionUsageDescription">
-            <string>$MOTION_USAGE_DESCRIPTION</string>
-        </config-file>
-
         <config-file target="*-Info.plist" parent="UIBackgroundModes">
             <array>
-                <string>location</string>
-            </array>
-        </config-file>
-
-        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
-            <array>
-              <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                  <string>prefs</string>
-                </array>
-              </dict>
+                $BACKGROUND_MODE_LOCATION
             </array>
         </config-file>
 
         <config-file target="config.xml" parent="/*">
             <feature name="BackgroundGeolocation">
-                <param name="ios-package" value="CDVBackgroundGeolocation" />
-                <param name="onload" value="true" />
+                <param name="ios-package" value="CDVBackgroundGeolocation"/>
             </feature>
         </config-file>
-        <framework src="CoreLocation.framework" />
-        <framework src="SystemConfiguration.framework" />
+
+        <framework src="CocoaLumberjack" type="podspec" spec="~> 3.5.0" />
         <framework src="AudioToolbox.framework" weak="true" />
+        <framework src="SystemConfiguration.framework" weak="true" />
         <framework src="AVFoundation.framework" weak="true" />
         <framework src="libsqlite3.dylib" weak="true" />
-        <!-- Generated with gen_sources.sh @ 2018-05-22 13:19:11 -->
-        <header-file src="ios/CDVBackgroundGeolocation/CDVBackgroundGeolocation.h" />
-        <source-file src="ios/CDVBackgroundGeolocation/CDVBackgroundGeolocation.m" />
-        <header-file src="ios/common/BackgroundGeolocation/CocoaLumberjack.h" />
-        <source-file src="ios/common/BackgroundGeolocation/CocoaLumberjack.m" />
-        <header-file src="ios/common/BackgroundGeolocation/FMDB.h" />
-        <source-file src="ios/common/BackgroundGeolocation/FMDB.m" />
-        <header-file src="ios/common/BackgroundGeolocation/FMDBLogger.h" />
-        <source-file src="ios/common/BackgroundGeolocation/FMDBLogger.m" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTUHeadingRequest.h" />
-        <source-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTUHeadingRequest.m" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationManager+Internal.h" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationManager.h" />
-        <source-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationManager.m" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationRequest.h" />
-        <source-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationRequest.m" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTULocationRequestDefines.h" />
-        <header-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTURequestIDGenerator.h" />
-        <source-file src="ios/common/BackgroundGeolocation/INTULocationManager/INTURequestIDGenerator.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURAbstractLocationProvider.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURAbstractLocationProvider.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURActivity.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURActivity.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURActivityLocationProvider.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURActivityLocationProvider.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURBackgroundGeolocationFacade.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURBackgroundGeolocationFacade.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURBackgroundSync.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURBackgroundSync.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURBackgroundTaskManager.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURBackgroundTaskManager.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURConfig.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURConfig.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURConfigurationContract.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURConfigurationContract.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURDistanceFilterLocationProvider.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURDistanceFilterLocationProvider.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURGeolocationOpenHelper.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURGeolocationOpenHelper.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURLocation.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURLocation.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURLocationContract.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURLocationContract.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURLocationManager.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURLocationManager.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURLogReader.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURLogReader.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURLogging.h" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURPostLocationTask.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURPostLocationTask.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURProviderDelegate.h" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURRawLocationProvider.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURRawLocationProvider.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURSQLiteConfigurationDAO.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURSQLiteConfigurationDAO.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURSQLiteHelper.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURSQLiteHelper.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURSQLiteLocationDAO.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURSQLiteLocationDAO.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURSQLiteOpenHelper.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURSQLiteOpenHelper.m" />
-        <header-file src="ios/common/BackgroundGeolocation/MAURUncaughtExceptionLogger.h" />
-        <source-file src="ios/common/BackgroundGeolocation/MAURUncaughtExceptionLogger.m" />
-        <header-file src="ios/common/BackgroundGeolocation/Reachability.h" />
-        <source-file src="ios/common/BackgroundGeolocation/Reachability.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOLocationManager.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOLocationManager.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOMotionActivity.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOMotionActivity.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOMotionDetector.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOMotionDetector.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOStepDetector.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SOMotionDetector/SOStepDetector.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/ext/NSString+ZIMString.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/ext/NSString+ZIMString.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlDataManipulationCommand.h" />
-        <header-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlExpression.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlExpression.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlSelectStatement.h" />
-        <source-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlSelectStatement.m" />
-        <header-file src="ios/common/BackgroundGeolocation/SQLQueryBuilder/sql/ZIMSqlStatement.h" />
-        <!-- End of generated sources -->
+        <framework src="libz.dylib" weak="true" />
+        <framework src="ios/TSLocationManager.framework" custom="true" />
+        <source-file src="ios/CDVBackgroundGeolocation.m" />
+        <header-file src="ios/CDVBackgroundGeolocation.h" />
+
      </platform>
 </plugin>
